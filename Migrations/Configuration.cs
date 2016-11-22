@@ -30,12 +30,13 @@ namespace KanbanLight.Migrations
             //    );
             //
 
+			// Backlog, Bereit, Coding, Test, Bestätigung und Erledig
 			context.Lanes.AddOrUpdate( 
 				l => l.LaneId,
-				new Lane() { LaneId = 1, Name = "unbearbeitet", DisplayName = "Unbearbeitete Tasks", Position = 1, KanbanTasks = new List<KanbanTask>()},
-				new Lane() { LaneId = 2, Name = "wip", DisplayName = "In Bearbeitung", Position = 2, KanbanTasks = new List<KanbanTask>()},
-				new Lane() { LaneId = 3, Name = "test", DisplayName = "Im Test", Position = 3, KanbanTasks = new List<KanbanTask>()},
-				new Lane() { LaneId = 4, Name = "done", DisplayName = "Fertig", Position = 4, KanbanTasks = new List<KanbanTask>()}
+				new Lane() { LaneId = 1, Name = "backlog", DisplayName = "Backlog", Position = 1, KanbanTasks = new List<KanbanTask>()},
+				new Lane() { LaneId = 2, Name = "coding", DisplayName = "Coding", Position = 2, KanbanTasks = new List<KanbanTask>()},
+				new Lane() { LaneId = 3, Name = "test", DisplayName = "Test", Position = 3, KanbanTasks = new List<KanbanTask>()},
+				new Lane() { LaneId = 4, Name = "done", DisplayName = "Erledigt", Position = 4, KanbanTasks = new List<KanbanTask>()}
 			);
         }
     }
