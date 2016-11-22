@@ -18,5 +18,7 @@ namespace KanbanLight.Models
 		public ApplicationUser LastChangeBy { get; set; }
 		public ApplicationUser Performer { get; set; }
 		public ApplicationUser Creator { get; set; }
+
+		public Lane CurrentLane { get; set; }
 	}
 }

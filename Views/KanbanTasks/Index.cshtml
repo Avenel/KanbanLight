@@ -1,0 +1,69 @@
+﻿@model IEnumerable<KanbanLight.Models.KanbanTask>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedAt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedAt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.KanbanTaskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.KanbanTaskId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.KanbanTaskId })
+        </td>
+    </tr>
+}
+
+</table>

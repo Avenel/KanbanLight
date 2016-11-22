@@ -1,0 +1,47 @@
+﻿@model KanbanLight.Models.KanbanIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Übersicht</h2>
+
+<a href="/kanbantasks/create"><h3>+ Neuen Task hinzufügen</h3></a>
+
+<div class="row">
+    @foreach (var lane in Model.Lanes)
+    {
+        <div class="col-md-3" style="text-align:center;">
+            <h4>@lane.DisplayName</h4>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @foreach (var lane in Model.Lanes)
+    {
+        <div class="col-md-3" style="text-align:center;">
+            @foreach (var kanbanTask in lane.KanbanTasks)
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="/kanbantasks/toprevious?id=@kanbanTask.KanbanTaskId"><-</a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="row" style="text-align:center">
+                                <label>@kanbanTask.Subject [@kanbanTask.DueDate.ToString("dd.mm.yyyy")]</label>
+                            </div>
+                            <div class="row" style="text-align:center">
+                                <div>@kanbanTask.Performer.UserName</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/kanbantasks/tonext?id=@kanbanTask.KanbanTaskId">-></a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

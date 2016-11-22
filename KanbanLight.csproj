@@ -206,6 +206,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KanbanController.cs" />
+    <Compile Include="Controllers\KanbanTasksController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,9 +229,14 @@
     <Compile Include="Migrations\201611222111274_lanePositionAdded.Designer.cs">
       <DependentUpon>201611222111274_lanePositionAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611222218345_addedFKToKanbanTask.cs" />
+    <Compile Include="Migrations\201611222218345_addedFKToKanbanTask.Designer.cs">
+      <DependentUpon>201611222218345_addedFKToKanbanTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\KanbanIndexViewModel.cs" />
     <Compile Include="Models\Lane.cs" />
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Models\KanbanTask.cs" />
@@ -324,6 +331,12 @@
     <Content Include="Views\Lanes\Details.cshtml" />
     <Content Include="Views\Lanes\Edit.cshtml" />
     <Content Include="Views\Lanes\Index.cshtml" />
+    <Content Include="Views\Kanban\Index.cshtml" />
+    <Content Include="Views\KanbanTasks\Create.cshtml" />
+    <Content Include="Views\KanbanTasks\Delete.cshtml" />
+    <Content Include="Views\KanbanTasks\Details.cshtml" />
+    <Content Include="Views\KanbanTasks\Edit.cshtml" />
+    <Content Include="Views\KanbanTasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -347,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611222111274_lanePositionAdded.resx">
       <DependentUpon>201611222111274_lanePositionAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611222218345_addedFKToKanbanTask.resx">
+      <DependentUpon>201611222218345_addedFKToKanbanTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
