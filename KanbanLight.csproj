@@ -233,6 +233,10 @@
     <Compile Include="Migrations\201611222218345_addedFKToKanbanTask.Designer.cs">
       <DependentUpon>201611222218345_addedFKToKanbanTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611230752318_isInProgressAdded.cs" />
+    <Compile Include="Migrations\201611230752318_isInProgressAdded.Designer.cs">
+      <DependentUpon>201611230752318_isInProgressAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -363,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611222218345_addedFKToKanbanTask.resx">
       <DependentUpon>201611222218345_addedFKToKanbanTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611230752318_isInProgressAdded.resx">
+      <DependentUpon>201611230752318_isInProgressAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

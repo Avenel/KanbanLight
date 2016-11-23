@@ -174,12 +174,27 @@ namespace KanbanLight.Controllers
 					kanbanTask.LastChangeBy = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
 					kanbanTask.MovedAt = DateTime.Now;
 					kanbanTask.ChangedAt = DateTime.Now;
+					kanbanTask.IsInProgress = true;
 
 					currLane.KanbanTasks.Remove(kanbanTask);
 					nextLane.KanbanTasks.Add(kanbanTask);
 					db.SaveChanges();
 				}
 			}
+		}
+
+		public ActionResult toggleIsInProgress(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
+			KanbanTask kanbanTask = db.Tasks.Find(id);
+			kanbanTask.IsInProgress = !kanbanTask.IsInProgress;
+			db.SaveChanges();
+
+			return RedirectToAction("Index", "Kanban");
 		}
 
         // POST: KanbanTasks/Delete/5

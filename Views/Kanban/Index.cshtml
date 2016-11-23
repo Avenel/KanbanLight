@@ -4,47 +4,87 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Übersicht</h2>
-
-<a href="/kanbantasks/create"><h3>+ Neuen Task hinzufügen</h3></a>
-
-<div class="row">
-    @foreach (var lane in Model.Lanes)
-    {
-        <div class="col-md-3" style="text-align:center;">
-            <h4>@lane.DisplayName</h4>
+<div class="row" style="margin-top:15px;">
+    <div class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+            <span class="sr-only">20% Complete</span>
         </div>
-    }
+    </div>
 </div>
 
-<div class="row">
-    @foreach (var lane in Model.Lanes)
-    {
-        <div class="col-md-3" style="text-align:center;">
-            @foreach (var kanbanTask in lane.KanbanTasks)
-            {
-                <div class="row">
-                    <div class="col-md-2">
-                        <a href="/kanbantasks/toprevious?id=@kanbanTask.KanbanTaskId"><-</a>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="row" style="text-align:center">
-                                <label>@kanbanTask.Subject [@kanbanTask.DueDate.ToString("dd.mm.yyyy")]</label>
+
+<div class="row" style="text-align:right;">
+    <a href="/kanbantasks/create" class="btn btn-default">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Neuen Task hinzufügen
+    </a>
+</div>
+
+    <div class="row" style="margin-top:15px;">
+        @foreach (var lane in Model.Lanes)
+        {
+            <div class="col-md-3" style="text-align:center;">
+                <h4>@lane.DisplayName</h4>
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        @foreach (var lane in Model.Lanes)
+        {
+            <div class="col-md-3" style="text-align:center;">
+                @foreach (var kanbanTask in lane.KanbanTasks)
+                {
+
+                    <div class="panel panel-@if (!@kanbanTask.IsInProgress){<text>success</text>} else {<text>warning</text>}">
+
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @if(!@kanbanTask.IsInProgress)
+                                    {
+                                        <a href="/kanbantasks/toprevious?id=@kanbanTask.KanbanTaskId"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+                                    }
+                                    else
+                                    {
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    }
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="row" style="text-align:center">
+                                            <a class="panel-title" data-toggle="collapse" href="#kanbankDetailCollaps_@kanbanTask.KanbanTaskId">
+                                                <label>@kanbanTask.Subject [@kanbanTask.DueDate.ToString("dd.mm.yyyy")]</label>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    @if(!@kanbanTask.IsInProgress)
+                                    {
+                                        <a href="/kanbantasks/tonext?id=@kanbanTask.KanbanTaskId"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+                                    }
+                                </div>
                             </div>
-                            <div class="row" style="text-align:center">
+                        </div>
+                        <div class="panel-body collapse" id="kanbankDetailCollaps_@kanbanTask.KanbanTaskId">
+                            <div class="row" style="text-align:center; padding:5px;">
+                                @if(@kanbanTask.IsInProgress)
+                                {
+                                    <a href="/kanbantasks/toggleisinprogress?id=@kanbanTask.KanbanTaskId" class="btn btn-warning">freigeben</a>
+                                }
+                            </div>
+                            <div class="row" style="text-align:Left; padding:5px;">
+                                <label>Wer</label>
                                 <div>@kanbanTask.Performer.UserName</div>
                             </div>
-                            <div class="row" style="text-align:center; font-style:italic;">
-                                <div>@kanbanTask.Tags</div>
+                            <div class="row" style="text-align:left; padding:5px;">
+                                <label>Tags</label>
+                                <div style="font-style:italic;">@kanbanTask.Tags</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <a href="/kanbantasks/tonext?id=@kanbanTask.KanbanTaskId">-></a>
-                    </div>
-                </div>
-            }
-        </div>
-    }
-</div>
+                }
+            </div>
+        }
+    </div>

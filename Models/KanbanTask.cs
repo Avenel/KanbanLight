@@ -19,6 +19,8 @@ namespace KanbanLight.Models
 		public ApplicationUser Performer { get; set; }
 		public ApplicationUser Creator { get; set; }
 
+		public bool IsInProgress { get; set; }
+
 		public Lane CurrentLane { get; set; }
 	}
 }
