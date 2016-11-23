@@ -174,7 +174,11 @@ namespace KanbanLight.Controllers
 					kanbanTask.LastChangeBy = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
 					kanbanTask.MovedAt = DateTime.Now;
 					kanbanTask.ChangedAt = DateTime.Now;
-					kanbanTask.IsInProgress = true;
+
+                    if (nextLane.Position > 1 && nextLane.Position < db.Lanes.ToList().Count())
+                    {
+                        kanbanTask.IsInProgress = true;
+                    }
 
 					currLane.KanbanTasks.Remove(kanbanTask);
 					nextLane.KanbanTasks.Add(kanbanTask);

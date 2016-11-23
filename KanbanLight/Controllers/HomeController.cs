@@ -10,7 +10,7 @@ namespace KanbanLight.Controllers
 	{
 		public ActionResult Index()
 		{
-			return View();
+            return RedirectToAction("Index", "Kanban", "");
 		}
 	}
 }

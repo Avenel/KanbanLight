@@ -14,7 +14,7 @@
 
 
 <div class="row" style="text-align:right;">
-    <a href="/kanbantasks/create" class="btn btn-default">
+    <a href="/KanbanLight/kanbantasks/create" class="btn btn-default">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
         Neuen Task hinzufügen
     </a>
@@ -24,7 +24,11 @@
         @foreach (var lane in Model.Lanes)
         {
             <div class="col-md-3" style="text-align:center;">
-                <h4>@lane.DisplayName</h4>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">@lane.DisplayName</div>
+                    </div>
+                </div>
             </div>
         }
     </div>
@@ -41,28 +45,31 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if(!@kanbanTask.IsInProgress)
+                                    @if(@kanbanTask.IsInProgress)
                                     {
-                                        <a href="/kanbantasks/toprevious?id=@kanbanTask.KanbanTaskId"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                                     }
                                     else
                                     {
-                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        if (lane.Position > 1)
+                                        {
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        }
                                     }
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="row" style="text-align:center">
                                             <a class="panel-title" data-toggle="collapse" href="#kanbankDetailCollaps_@kanbanTask.KanbanTaskId">
-                                                <label>@kanbanTask.Subject [@kanbanTask.DueDate.ToString("dd.mm.yyyy")]</label>
+                                                <label>@kanbanTask.Subject</label>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    @if(!@kanbanTask.IsInProgress)
+                                    @if(!@kanbanTask.IsInProgress && @lane.Position < Model.Lanes.Count)
                                     {
-                                        <a href="/kanbantasks/tonext?id=@kanbanTask.KanbanTaskId"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+                                        <a href="/KanbanLight/kanbantasks/tonext?id=@kanbanTask.KanbanTaskId"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
                                     }
                                 </div>
                             </div>
@@ -71,16 +78,37 @@
                             <div class="row" style="text-align:center; padding:5px;">
                                 @if(@kanbanTask.IsInProgress)
                                 {
-                                    <a href="/kanbantasks/toggleisinprogress?id=@kanbanTask.KanbanTaskId" class="btn btn-warning">freigeben</a>
+                                    <a href="/KanbanLight/kanbantasks/toggleisinprogress?id=@kanbanTask.KanbanTaskId" class="btn btn-success">freigeben</a>
                                 }
+                                else
+                                {
+                                    if (lane.Position > 1)
+                                    {
+                                        <a href="/KanbanLight/kanbantasks/toprevious?id=@kanbanTask.KanbanTaskId" class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurückstellen</a>
+                                    }
+                                }
+
+                                <a href="/KanbanLight/kanbantasks/Edit?id=@kanbanTask.KanbanTaskId" class="btn btn-info"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                <a href="/KanbanLight/kanbantasks/Delete?id=@kanbanTask.KanbanTaskId" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                
+
+
                             </div>
                             <div class="row" style="text-align:Left; padding:5px;">
                                 <label>Wer</label>
                                 <div>@kanbanTask.Performer.UserName</div>
                             </div>
                             <div class="row" style="text-align:left; padding:5px;">
+                                <label>Beschreibung</label>
+                                <div>@kanbanTask.Description</div>
+                            </div>
+                            <div class="row" style="text-align:left; padding:5px;">
                                 <label>Tags</label>
-                                <div style="font-style:italic;">@kanbanTask.Tags</div>
+                                <div>@kanbanTask.Tags</div>
+                            </div>
+                            <div class="row" style="text-align:left; padding: 5px;">
+                                <label>Zu erledigen bis</label>
+                                <div>@kanbanTask.DueDate.ToString("dd.MM.yyyy")</div>
                             </div>
                         </div>
                     </div>
